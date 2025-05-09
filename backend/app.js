@@ -1,5 +1,6 @@
 // backend/app.js
 const express = require('express');
+const transferRoute = require('./routes/transfer');
 const app = express();
 
 const accountsRoute = require('./routes/accounts');
@@ -9,6 +10,8 @@ console.log(accountsRoute); // Check if accountsRoute is a valid function
 
 app.use(express.json());
 app.use('/accounts', accountsRoute);
+app.use('/transfer', transferRoute);
+
 //app.use('/api', authRoutes); // ← Add this line
 
 // Sample root route
