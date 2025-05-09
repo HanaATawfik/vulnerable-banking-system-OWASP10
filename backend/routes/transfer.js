@@ -4,7 +4,9 @@ const router = express.Router();
 const { users } = require('../utils/db.js');
 
 // Vulnerable Transfer Endpoint – No Auth, No Access Control
-//🔥 OWASP A01:2021 – Broken Access Control
+//A01:2021 – Broken Access Control
+//A04:2021 – Insecure Design
+//A05:2021 – Security Misconfiguration
 router.post('/', (req, res) => {
   const { fromAccount, toAccount, amount } = req.body;
 
