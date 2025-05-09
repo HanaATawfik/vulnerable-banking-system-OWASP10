@@ -53,3 +53,23 @@ const users = [
     users,
     getAllUsers 
   };
+
+  const transactions = [
+    { id: 1, from: 'A1', to: 'A3', amount: 100, timestamp: '2024-01-01T10:00:00Z' },
+    { id: 2, from: 'A2', to: 'A4', amount: 300, timestamp: '2024-01-02T14:30:00Z' },
+    { id: 3, from: 'A3', to: 'A1', amount: 200, timestamp: '2024-01-03T09:15:00Z' },
+    { id: 4, from: 'A4', to: 'A2', amount: 150, timestamp: '2024-01-04T12:45:00Z' },
+    // No user mapping, no roles, full visibility — violates A04, A08
+  ];
+  
+  // Simulate a DB fetch with no integrity checks — violates A08
+  const getAllTransactions = async () => {
+    return Promise.resolve(transactions);
+  };
+  
+  module.exports = {
+    users,
+    getAllUsers,
+    transactions,
+    getAllTransactions
+  };
