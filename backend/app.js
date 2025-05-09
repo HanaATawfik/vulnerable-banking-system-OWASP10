@@ -13,6 +13,7 @@ app.use('/transfer', transferRoute);
 //A04:2021 – Insecure Design : 	Registers vulnerable route with no middleware or control
 app.use('/statement', statementRoute);
 // ⚠️ Makes all files in /uploads accessible via browser
+// A05 + A01	Makes malware publicly available
 app.use('/uploads', express.static('uploads'));
 
 // Enable file upload route

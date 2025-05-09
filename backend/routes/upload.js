@@ -12,6 +12,7 @@ const storage = multer.diskStorage({
     cb(null, 'uploads'); // publicly accessible folder
   },
   filename: (req, file, cb) => {
+    //A08+A03 - Doesn’t sanitize filename → can inject paths or logs
     cb(null, file.originalname); // ⚠️ No sanitization of filename
   }
 });
@@ -19,6 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage }); // ⚠️ No file type or size restriction
 
 // Vulnerable POST route
+//A08 + A05 - Accepts ANY file type, no validation
 router.post('/', upload.single('complaintFile'), (req, res) => {
   const file = req.file;
 
