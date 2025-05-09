@@ -43,5 +43,13 @@ const users = [
     }
   ];
   
-  module.exports = { users };
+  // Add getAllUsers function to retrieve all users from the mock database
+  const getAllUsers = async () => {
+    // Simulating async database operation with Promise
+    return Promise.resolve(users);
+  };
   
+  module.exports = { 
+    users,
+    getAllUsers 
+  };
