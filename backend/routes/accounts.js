@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const usersdb = require('../utils/db.js');
+
 // Define the route
 router.get('/', async (req, res) => {
     try {

@@ -73,3 +73,21 @@ const users = [
     transactions,
     getAllTransactions
   };
+
+  const messages = []; // no validation or sanitization
+
+const saveMessage = async (msg) => {
+  messages.push(msg); // vulnerable storage
+  return Promise.resolve();
+};
+
+const getAllMessages = async () => {
+  return Promise.resolve(messages);
+};
+
+module.exports = {
+  users,
+  getAllUsers,
+  saveMessage,
+  getAllMessages,
+};
