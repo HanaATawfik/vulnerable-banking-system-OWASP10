@@ -28,4 +28,8 @@ router.get('/admin', async (req, res) => {
   res.send(responseHTML);
 });
 
+const log = `[${new Date().toISOString()}] ${username}: ${message}`;
+console.log(log); // BAD: logs raw input from user
+// bad logging (A09)
+
 module.exports = router;
