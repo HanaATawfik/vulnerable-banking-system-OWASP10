@@ -24,12 +24,11 @@ router.get('/admin', async (req, res) => {
     responseHTML += `<li><strong>${msg.username}:</strong> ${msg.message}</li>`;
   });
 
-  responseHTML += '</ul>';
+responseHTML += '</ul>';
   res.send(responseHTML);
 });
 
-const log = `[${new Date().toISOString()}] ${username}: ${message}`;
-console.log(log); // BAD: logs raw input from user
-// bad logging (A09)
+// Note: Logging should happen inside route handlers where username and message are defined
+// bad logging practices (A09) have been demonstrated in the route handler above
 
 module.exports = router;

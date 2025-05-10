@@ -4,7 +4,7 @@ const transferRoute = require('./routes/transfer');
 const app = express();
 const statementRoute = require('./routes/statement');
 const accountsRoute = require('./routes/accounts');
-const messageRoutes = require('./routes/messages');
+const messageRoutes = require('./routes/message');
 console.log(accountsRoute); // Check if accountsRoute is a valid function
 const uploadRoute = require('./routes/upload');
 
@@ -17,7 +17,7 @@ app.use('/statement', statementRoute);
 // A05 + A01	Makes malware publicly available
 app.use('/uploads', express.static('uploads'));
 // Load vulnerable message routes
-app.use('/messages', messageRoutes);
+app.use('/message', messageRoutes);
 
 // Enable file upload route
 app.use('/upload', uploadRoute);
