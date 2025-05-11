@@ -91,3 +91,21 @@ module.exports = {
   saveMessage,
   getAllMessages,
 };
+
+const logs = []; // Still no validation
+
+const saveLog = async (log) => {
+  logs.push(log);
+  return Promise.resolve();
+};
+
+const getAllLogs = async () => {
+  return Promise.resolve(logs);
+};
+
+module.exports = {
+  users,
+  getAllUsers,
+    saveLog,
+  getAllLogs
+};

@@ -7,6 +7,7 @@ const accountsRoute = require('./routes/accounts');
 const messageRoutes = require('./routes/message');
 console.log(accountsRoute); // Check if accountsRoute is a valid function
 const uploadRoute = require('./routes/upload');
+const logsRoute = require('./routes/logs');
 
 app.use(express.json());
 app.use('/accounts', accountsRoute);
@@ -21,6 +22,7 @@ app.use('/message', messageRoutes);
 
 // Enable file upload route
 app.use('/upload', uploadRoute);
+app.use('/logs', logsRoute);
 
 // Sample root route
 app.get('/', (req, res) => {
