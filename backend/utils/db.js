@@ -4,7 +4,7 @@ const users = [
     {
       id: 1,
       username: 'user1',
-      password: 'password123', // plaintext on purpose for vulnerability //A01:2021 – Broken Access Control
+      password: 'password123', // plaintext on purpose for vulnerability
       role: 'user',
       accounts: [
         { accountId: 'A1', balance: 5000 },
@@ -41,43 +41,30 @@ const users = [
         { accountId: 'A8', balance: 1000 }
       ]
     }
-  ];
-  
-  // Add getAllUsers function to retrieve all users from the mock database
-  const getAllUsers = async () => {
-    // Simulating async database operation with Promise
-    return Promise.resolve(users);
-  };
-  
-  module.exports = { 
-    users,
-    getAllUsers 
-  };
+];
 
-  const transactions = [
-    { id: 1, from: 'A1', to: 'A3', amount: 100, timestamp: '2024-01-01T10:00:00Z' },
-    { id: 2, from: 'A2', to: 'A4', amount: 300, timestamp: '2024-01-02T14:30:00Z' },
-    { id: 3, from: 'A3', to: 'A1', amount: 200, timestamp: '2024-01-03T09:15:00Z' },
-    { id: 4, from: 'A4', to: 'A2', amount: 150, timestamp: '2024-01-04T12:45:00Z' },
-    // No user mapping, no roles, full visibility — violates A04, A08
-  ];
-  
-  // Simulate a DB fetch with no integrity checks — violates A08
-  const getAllTransactions = async () => {
-    return Promise.resolve(transactions);
-  };
-  
-  module.exports = {
-    users,
-    getAllUsers,
-    transactions,
-    getAllTransactions
-  };
+// User-related functions
+const getAllUsers = async () => {
+  return Promise.resolve(users);
+};
 
-  const messages = []; // no validation or sanitization
+// Transaction-related data and functions
+const transactions = [
+  { id: 1, from: 'A1', to: 'A3', amount: 100, timestamp: '2024-01-01T10:00:00Z' },
+  { id: 2, from: 'A2', to: 'A4', amount: 300, timestamp: '2024-01-02T14:30:00Z' },
+  { id: 3, from: 'A3', to: 'A1', amount: 200, timestamp: '2024-01-03T09:15:00Z' },
+  { id: 4, from: 'A4', to: 'A2', amount: 150, timestamp: '2024-01-04T12:45:00Z' },
+];
+
+const getAllTransactions = async () => {
+  return Promise.resolve(transactions);
+};
+
+// Message-related data and functions
+const messages = []; 
 
 const saveMessage = async (msg) => {
-  messages.push(msg); // vulnerable storage
+  messages.push(msg);
   return Promise.resolve();
 };
 
@@ -85,14 +72,8 @@ const getAllMessages = async () => {
   return Promise.resolve(messages);
 };
 
-module.exports = {
-  users,
-  getAllUsers,
-  saveMessage,
-  getAllMessages,
-};
-
-const logs = []; // Still no validation
+// Log-related data and functions
+const logs = [];
 
 const saveLog = async (log) => {
   logs.push(log);
@@ -103,9 +84,14 @@ const getAllLogs = async () => {
   return Promise.resolve(logs);
 };
 
+// Single exports object with all functions
 module.exports = {
   users,
   getAllUsers,
-    saveLog,
+  transactions,
+  getAllTransactions,
+  saveMessage,
+  getAllMessages,
+  saveLog,
   getAllLogs
 };
