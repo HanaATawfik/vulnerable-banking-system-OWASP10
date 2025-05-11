@@ -2,9 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const { users } = require('../utils/db');
+const logs = []; // Global transfer log
 
 router.post('/', (req, res) => {
-  const { fromAccountId, toAccountId, amount } = req.body;
+  const { fromAccountId, toAccountId, amount, note } = req.body;
 
   if (!fromAccountId || !toAccountId || !amount) {
     return res.status(400).send('Missing required fields');
@@ -37,6 +38,33 @@ router.post('/', (req, res) => {
   toAccount.balance += amount;
 
   res.send(`Transferred ${amount} from ${fromAccountId} to ${toAccountId}`);
+
+    // Insecure logging of request data
+    logs.push({
+      from: fromAccount,
+      to: toAccount,
+      amount,
+      note, // attacker can inject JS here
+      timestamp: new Date().toISOString()
+    });
+  
+    res.status(200).send('Transfer completed');
+  
+});
+// Admin route to view transfer logs
+router.get('/logs', (req, res) => {
+  // ⚠️ Unprotected and unsanitized logs
+  let html = '<h1>Transfer Logs</h1><ul>';
+  logs.forEach(log => {
+    html += `<li>
+      <b>${log.from}</b> sent <b>${log.amount}</b> to <b>${log.to}</b> <br/>
+      Note: ${log.note} <br/>
+      Time: ${log.timestamp}
+    </li><hr>`;
+  });
+  html += '</ul>';
+
+  res.send(html); // ⚠️ Stored XSS from 'note'
 });
 
 module.exports = router;
